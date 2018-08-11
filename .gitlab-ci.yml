@@ -1,0 +1,8 @@
+pycodestyle:
+  stage: test
+  image: docker.io/python:3.6.4
+  script:
+  - pip install pycodestyle
+  - pycodestyle .
+  variables:
+    GIT_SSL_NO_VERIFY: "true"

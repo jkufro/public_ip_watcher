@@ -1,0 +1,3 @@
+*.pyc
+settings.yaml
+.previous_pub_ip
