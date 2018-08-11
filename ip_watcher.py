@@ -1,8 +1,19 @@
+#!/usr/bin/env python
 import smtplib
 from email.mime.text import MIMEText
 import yaml
 import os
 from requests import get
+import argparse
+
+
+def get_args():
+    desc = 'Send emails when your public ip address changes'
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('-f', '--force',
+                        action='store_true',
+                        help='Force an email to be sent')
+    return parser.parse_args()
 
 
 def get_current_pub_ip():
@@ -41,6 +52,7 @@ def get_email_content(email_template_filename, dns_name, previous_ip,
 
 
 def main():
+    args = get_args()
     # load settings and setup variables
     settings = yaml.load(open('settings.yaml').read())
     to_emails = ', '.join(settings['to_emails'])
@@ -53,7 +65,7 @@ def main():
                                       settings['dns_management_link'])
 
     # check if our ip address has changed
-    if previous_pub_ip != current_pub_ip:
+    if (previous_pub_ip != current_pub_ip) or (args.force):
         write_previous_pub_ip_file(settings['previous_ip_filename'],
                                    current_pub_ip)
         send_change_email(settings['gmail_username'],
