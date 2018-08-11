@@ -1,1 +1,2 @@
 PyYaml==3.13
+requests==2.19.1
