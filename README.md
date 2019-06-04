@@ -2,7 +2,7 @@
 
 This program checks for when your public ip address changes, and uses gmail to notify any number of people with useful information. This program works best when setup with a [cron job](https://en.wikipedia.org/wiki/Cron).
 
-You can force an email to be sent by using the `-f` or `--force` options.
+You can force an email to be sent regardless of if the ip has changed by using the `-f` or `--force` options.
 
 `./ip_watcher.py --force`
 
